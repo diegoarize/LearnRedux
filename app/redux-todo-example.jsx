@@ -1,8 +1,12 @@
 const redux = require('redux');
 
-console.log('Starting redux event');
-
-var reducer = (state = {name: 'Anonymous'}, action) => {
+console.log('Starting todo redux example');
+var stateDefault = {
+  searchText: '',
+  showCompleted: false,
+  todos: []
+}
+var reducer = (state = stateDefault, action) => {
   //state = state || {name: 'Anonymous'};
   return state;
 };
