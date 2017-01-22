@@ -22,7 +22,16 @@ switch (action.type) {
 
 };
 
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
+
+store.subscribe(() => {
+  var state = store.getState();
+
+  console.log('searchText is', state.searchText);
+  document.getElementById('app').innerHTML = state.searchText;
+});
 
 var currentState = store.getState();
 
@@ -34,4 +43,7 @@ store.dispatch({
   searchText: 'Do Something'
 });
 
-console.log('searchText should be Do Something', store.getState());
+store.dispatch({
+  type: 'CHANGE_SEARCH_TEXT',
+  searchText: 'Do another thing'
+});
